@@ -24,4 +24,5 @@ public class IndexControllerTest {
         // then
         assertThat(body).contains("Building Web Service with Spring boot");
     }
+
 }
