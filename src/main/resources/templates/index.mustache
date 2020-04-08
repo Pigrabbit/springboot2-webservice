@@ -4,5 +4,27 @@
         <div class="col-md-6">
             <a href="/posts/save" role="button" class="btn btn-primary">save post</a>
         </div>
+        <br>
+        <!-- printing posts below -->
+        <table class="table table-horizontal table-bordered">
+            <thread class="thread-strong">
+                <tr>
+                    <th>Post Index</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Last updated</th>
+                </tr>
+            </thread>
+            <tbody id = "tbody">
+            {{#posts}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{title}}</td>
+                    <td>{{author}}</td>
+                    <td>{{modifiedDate}}</td>
+                </tr>
+            {{/posts}}
+            </tbody>
+        </table>
     </div>
 {{>layout/footer}}

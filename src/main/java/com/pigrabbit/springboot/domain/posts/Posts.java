@@ -1,5 +1,6 @@
 package com.pigrabbit.springboot.domain.posts;
 
+import com.pigrabbit.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

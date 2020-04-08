@@ -1,4 +1,4 @@
-package com.pigrabbit.springboot.domain.posts;
+package com.pigrabbit.springboot.domain;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
