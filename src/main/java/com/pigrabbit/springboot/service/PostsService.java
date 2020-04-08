@@ -2,18 +2,20 @@ package com.pigrabbit.springboot.service;
 
 import com.pigrabbit.springboot.domain.posts.Posts;
 import com.pigrabbit.springboot.domain.posts.PostsRepository;
+import com.pigrabbit.springboot.web.dto.PostsListResponseDto;
 import com.pigrabbit.springboot.web.dto.PostsResponseDto;
 import com.pigrabbit.springboot.web.dto.PostsSaveRequestDto;
 import com.pigrabbit.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class PostsService {
-
     private final PostsRepository postsRepository;
 
     @Transactional
@@ -31,10 +33,18 @@ public class PostsService {
         return id;
     };
 
+    @Transactional(readOnly = true)
     public PostsResponseDto findById(Long id) {
         Posts entity = postsRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("No corresponding posts. id=" + id));
 
         return new PostsResponseDto(entity);
     };
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }
