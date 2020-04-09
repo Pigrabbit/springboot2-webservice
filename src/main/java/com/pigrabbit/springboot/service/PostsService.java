@@ -33,6 +33,13 @@ public class PostsService {
         return id;
     };
 
+    @Transactional
+    public void delete(Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No matching posts. id = " + id));
+        postsRepository.delete(posts);
+    }
+
     @Transactional(readOnly = true)
     public PostsResponseDto findById(Long id) {
         Posts entity = postsRepository.findById(id).orElseThrow(() ->
