@@ -25,4 +25,19 @@ public class IndexControllerTest {
         assertThat(body).contains("Building Web Service with Spring boot");
     }
 
+    @Test
+    public void openPostSavingPage() {
+        // when
+        String body = this.restTemplate.getForObject("/posts/save", String.class);
+        // then
+        assertThat(body).contains("Save a post");
+    }
+
+//    @Test
+//    public void openPostUpdatingPage() {
+//        // when
+//        String body = this.restTemplate.getForObject("/posts/update/{id}", String.class);
+//        // then
+//        assertThat(body).contains("Update Post");
+//    }
 }

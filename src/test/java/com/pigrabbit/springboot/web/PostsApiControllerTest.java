@@ -2,6 +2,7 @@ package com.pigrabbit.springboot.web;
 
 import com.pigrabbit.springboot.domain.posts.Posts;
 import com.pigrabbit.springboot.domain.posts.PostsRepository;
+import com.pigrabbit.springboot.web.dto.PostsResponseDto;
 import com.pigrabbit.springboot.web.dto.PostsSaveRequestDto;
 import com.pigrabbit.springboot.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
@@ -96,4 +97,38 @@ public class PostsApiControllerTest {
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
     }
+
+    @Test
+    public void deletePost() throws Exception {
+        // given
+        Posts savedPost = postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .build());
+        Long id = savedPost.getId();
+        String url = "http://localhost:" + port + "/api/v1/posts/" + id;
+        // when
+        restTemplate.delete(url, Long.class);
+        // then
+        List<Posts> all = postsRepository.findAll();
+        assertThat(all.contains(savedPost)).isEqualTo(false);
+    }
+
+//    @Test
+//    public void findPostById() throws Exception{
+//        // given
+//        Posts savedPost = postsRepository.save(Posts.builder()
+//                .title("title")
+//                .content("content")
+//                .author("author")
+//                .build());
+//
+//        Long id = savedPost.getId();
+//        String url = "http://localhost:" + port + "/api/v1/posts/" + id;
+//        // when
+//        ResponseEntity<PostsResponseDto> responseEntity = restTemplate.getForEntity(url, PostsResponseDto.class);
+//        // then
+//        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+//    }
 }
