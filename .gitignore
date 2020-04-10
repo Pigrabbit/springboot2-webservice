@@ -2,3 +2,6 @@
 .idea
 build/
 settings.gradle
+
+application-oauth.properties
+
